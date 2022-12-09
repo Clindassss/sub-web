@@ -4,7 +4,7 @@
       <el-col>
         <el-card>
           <div slot="header">
-            Subscription Converter
+            56@订阅转换
             <svg-icon icon-class="github" style="margin-left: 20px" @click="goToProject" />
 
             <div style="display: inline-block; position:absolute; right: 20px">{{ backendVersion }}</div>
@@ -36,7 +36,7 @@
                     style="width: 100%"
                     v-model="form.customBackend"
                     :fetch-suggestions="backendSearch"
-                    placeholder="动动小手，（建议）自行搭建后端服务。例：http://127.0.0.1:25500/sub?"
+                    placeholder="留空则默认使用本站后端。也可以动动小手，（建议）自行搭建后端服务。例：http://127.0.0.1:25500/sub?"
                   >
                     <el-button slot="append" @click="gotoGayhub" icon="el-icon-link">前往项目仓库</el-button>
                   </el-autocomplete>
@@ -177,15 +177,6 @@
                   :disabled="customSubUrl.length === 0"
                 >一键导入Clash</el-button>
               </el-form-item>
-              <el-form-item label-width="0px" style="text-align: center">
-                <el-button
-                    style="width: 250px"
-                    type="primary"
-                    @click="dialogLoadConfigVisible = true"
-                    icon="el-icon-copy-document"
-                    :loading="loading"
-                >从URL解析</el-button>
-              </el-form-item>
             </el-form>
           </el-container>
         </el-card>
@@ -226,38 +217,6 @@
         >确 定</el-button>
       </div>
     </el-dialog>
-
-    <el-dialog
-        :visible.sync="dialogLoadConfigVisible"
-        :show-close="false"
-        :close-on-click-modal="false"
-        :close-on-press-escape="false"
-        width="700px"
-    >
-      <div slot="title">
-        可以从老的订阅信息中解析信息,填入页面中去
-      </div>
-      <el-form label-position="left">
-        <el-form-item prop="uploadConfig">
-          <el-input
-              v-model="loadConfig"
-              type="textarea"
-              :autosize="{ minRows: 15, maxRows: 15}"
-              maxlength="5000"
-              show-word-limit
-          ></el-input>
-        </el-form-item>
-      </el-form>
-      <div slot="footer" class="dialog-footer">
-        <el-button @click="loadConfig = ''; dialogLoadConfigVisible = false">取 消</el-button>
-        <el-button
-            type="primary"
-            @click="confirmLoadConfig"
-            :disabled="loadConfig.length === 0"
-        >确 定</el-button>
-      </div>
-    </el-dialog>
-
   </div>
 </template>
 
@@ -310,6 +269,116 @@ export default {
                 label: "Urltest",
                 value:
                   "https://cdn.jsdelivr.net/gh/SleepyHeeead/subconverter-config@master/remote-config/universal/urltest.ini"
+              }
+            ]
+          },
+          {
+            label: "ACL4SSR",
+            options: [
+              {
+                label: "ACL4SSR_Online 默认版 分组比较全 (与Github同步)",
+                value:
+                  "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online.ini"
+              },
+              {
+                label: "ACL4SSR_Online_AdblockPlus 更多去广告 (与Github同步)",
+                value:
+                  "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online_AdblockPlus.ini"
+              },
+              {
+                label: "ACL4SSR_Online_NoAuto 无自动测速 (与Github同步)",
+                value:
+                  "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online_NoAuto.ini"
+              },
+              {
+                label: "ACL4SSR_Online_NoReject 无广告拦截规则 (与Github同步)",
+                value:
+                  "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online_NoReject.ini"
+              },
+              {
+                label: "ACL4SSR_Online_Mini 精简版 (与Github同步)",
+                value:
+                  "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online_Mini.ini"
+              },
+              {
+                label: "ACL4SSR_Online_Mini_AdblockPlus.ini 精简版 更多去广告 (与Github同步)",
+                value:
+                  "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online_Mini_AdblockPlus.ini"
+              },
+              {
+                label: "ACL4SSR_Online_Mini_NoAuto.ini 精简版 不带自动测速 (与Github同步)",
+                value:
+                  "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online_Mini_NoAuto.ini"
+              },
+              {
+                label: "ACL4SSR_Online_Mini_Fallback.ini 精简版 带故障转移 (与Github同步)",
+                value:
+                  "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online_Mini_Fallback.ini"
+              },
+              {
+                label: "ACL4SSR_Online_Mini_MultiMode.ini 精简版 自动测速、故障转移、负载均衡 (与Github同步)",
+                value:
+                  "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online_Mini_MultiMode.ini"
+              },
+              {
+                label: "ACL4SSR_Online_Full 全分组 重度用户使用 (与Github同步)",
+                value:
+                  "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online_Full.ini"
+              },
+              {
+                label: "ACL4SSR_Online_Full_NoAuto.ini 全分组 无自动测速 重度用户使用 (与Github同步)",
+                value:
+                  "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online_Full_NoAuto.ini"
+              },
+              {
+                label: "ACL4SSR_Online_Full_AdblockPlus 全分组 重度用户使用 更多去广告 (与Github同步)",
+                value:
+                  "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online_Full_AdblockPlus.ini"
+              },
+              {
+                label: "ACL4SSR_Online_Full_Netflix 全分组 重度用户使用 奈飞全量 (与Github同步)",
+                value:
+                  "https://raw.githubusercontent.com/ACL4SSR/ACL4SSR/master/Clash/config/ACL4SSR_Online_Full_Netflix.ini"
+              },
+              {
+                label: "ACL4SSR 本地 默认版 分组比较全",
+                value: "config/ACL4SSR.ini"
+              },
+              {
+                label: "ACL4SSR_Mini 本地 精简版",
+                value: "config/ACL4SSR_Mini.ini"
+              },
+              {
+                label: "ACL4SSR_Mini_NoAuto.ini 本地 精简版+无自动测速",
+                value: "config/ACL4SSR_Mini_NoAuto.ini"
+              },
+              {
+                label: "ACL4SSR_Mini_Fallback.ini 本地 精简版+fallback",
+                value: "config/ACL4SSR_Mini_Fallback.ini"
+              },
+              {
+                label: "ACL4SSR_BackCN 本地 回国",
+                value: "config/ACL4SSR_BackCN.ini"
+              },
+              {
+                label: "ACL4SSR_NoApple 本地 无苹果分流",
+                value: "config/ACL4SSR_NoApple.ini"
+              },
+              {
+                label: "ACL4SSR_NoAuto 本地 无自动测速 ",
+                value: "config/ACL4SSR_NoAuto.ini"
+              },
+              {
+                label: "ACL4SSR_NoAuto_NoApple 本地 无自动测速&无苹果分流",
+                value: "config/ACL4SSR_NoAuto_NoApple.ini"
+              },
+              {
+                label: "ACL4SSR_NoMicrosoft 本地 无微软分流",
+                value: "config/ACL4SSR_NoMicrosoft.ini"
+              },
+              {
+                label: "ACL4SSR_WithGFW 本地 GFW列表",
+                value: "config/ACL4SSR_WithGFW.ini"
               }
             ]
           },
@@ -384,7 +453,7 @@ export default {
         sort: false,
         udp: false,
         tfo: false,
-        scv: true,
+        scv: false,
         fdn: false,
         appendType: false,
         insert: false, // 是否插入默认订阅的节点，对应配置项 insert_url
@@ -406,8 +475,6 @@ export default {
       curtomShortSubUrl: "",
 
       dialogUploadConfigVisible: false,
-      loadConfig: "",
-      dialogLoadConfigVisible: false,
       uploadConfig: "",
       uploadPassword: "",
       myBot: tgBotLink,
@@ -632,87 +699,6 @@ export default {
         .finally(() => {
           this.loading = false;
         });
-    },
-    confirmLoadConfig(){
-      // 怎么解析短链接的302和301...
-      if (this.loadConfig.indexOf("target")=== -1){
-        this.$message.error("请输入正确的订阅地址,暂不支持短链接!");
-        return;
-      }
-      let url
-      try {
-        url = new URL(this.loadConfig)
-      } catch (error) {
-        this.$message.error("请输入正确的订阅地址!");
-        return;
-      }
-      this.form.customBackend = url.origin + url.pathname + "?"
-      let param = new URLSearchParams(url.search);
-      if (param.get("target")){
-        let target = param.get("target");
-        if (target === 'surge' && param.get("ver")) {
-          // 类型为surge,有ver
-          this.form.clientType = target+"&ver="+param.get("ver");
-        } else if (target === 'surge'){
-          //类型为surge,没有ver
-          this.form.clientType = target+"&ver=4"
-        } else {
-          //类型为其他
-          this.form.clientType = target;
-        }
-      }
-      if (param.get("url")){
-        this.form.sourceSubUrl = param.get("url");
-      }
-      if (param.get("insert")){
-        this.form.insert = param.get("insert") === 'true';
-      }
-      if (param.get("config")){
-        this.form.remoteConfig = param.get("config");
-      }
-      if (param.get("exclude")){
-        this.form.excludeRemarks = param.get("exclude");
-      }
-      if (param.get("include")){
-        this.form.includeRemarks = param.get("include");
-      }
-      if (param.get("filename")){
-        this.form.filename = param.get("filename");
-      }
-      if (param.get("append_type")){
-        this.form.appendType = param.get("append_type") === 'true';
-      }
-      if (param.get("emoji")){
-        this.form.emoji = param.get("emoji") === 'true';
-      }
-      if (param.get("list")){
-        this.form.nodeList = param.get("list") === 'true';
-      }
-      if (param.get("tfo")){
-        this.form.tfo = param.get("tfo") === 'true';
-      }
-      if (param.get("scv")){
-        this.form.scv = param.get("scv") === 'true';
-      }
-      if (param.get("fdn")){
-        this.form.fdn = param.get("fdn") === 'true';
-      }
-      if (param.get("sort")){
-        this.form.sort = param.get("sort") === 'true';
-      }
-      if (param.get("udp")){
-        this.form.udp = param.get("udp") === 'true';
-      }
-      if (param.get("surge.doh")){
-        this.form.tpl.surge.doh = param.get("surge.doh") === 'true';
-      }
-      if (param.get("clash.doh")){
-        this.form.tpl.clash.doh = param.get("clash.doh") === 'true';
-      }
-      if (param.get("new_name")){
-        this.form.new_name = param.get("new_name") === 'true';
-      }
-      this.dialogLoadConfigVisible = false;
     },
     backendSearch(queryString, cb) {
       let backends = this.options.backendOptions;
